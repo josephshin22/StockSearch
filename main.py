@@ -8,7 +8,7 @@ def main():
     with st.sidebar:
         selected = option_menu(
             "Navigation",
-            ["Home", "Stock Information"],
+            ["Home", "Stock Information", "Watchlist"],
             icons=["house", "bar-chart", "info-circle",
                    "graph-up", "calculator"],
             menu_icon="cast",
@@ -22,6 +22,9 @@ def main():
     elif selected == "Stock Information":
         import StockInfo
         StockInfo.main()
+    elif selected == "Watchlist":
+        import Watchlist
+        Watchlist.main()
 
 
 if __name__ == "__main__":
