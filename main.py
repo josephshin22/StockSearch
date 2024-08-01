@@ -8,8 +8,7 @@ def main():
     with st.sidebar:
         selected = option_menu(
             "Navigation",
-            ["Home", "Sector Data", "Stock Information",
-                "Economic Features", "DCF Analysis"],
+            ["Home", "Stock Information"],
             icons=["house", "bar-chart", "info-circle",
                    "graph-up", "calculator"],
             menu_icon="cast",
