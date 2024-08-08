@@ -35,14 +35,30 @@ def display_stock_info(ticker):
             st.info(f'{ticker} is already in the watchlist')
 
 
-def display_historical_graph(ticker):
+def get_historical_data(ticker, period):
     stock = yf.Ticker(ticker)
-    hist = stock.history(period="1y")
-    fig = px.line(hist, x=hist.index, y='Close',
-                  title=f"{ticker} Historical Prices")
-    st.plotly_chart(fig)
+    return stock.history(period=period)
 
-# Define a function to display financial ratios
+
+def display_historical_graph(ticker):
+    # Add a horizontal bar of buttons for time period selection without icons
+    period = option_menu(
+        menu_title=None,  # No menu title, just options
+        options=["1mo", "3mo", "6mo", "ytd", "1y", "5y", "max"],
+        menu_icon="calendar",  # Icon shown for the menu
+        default_index=3,  # Default to "1y"
+        orientation="horizontal",
+        styles={
+            "container": {"padding": "0", "margin": "0"},
+            "nav-link": {"font-size": "14px", "text-align": "center", "margin": "0px", "--hover-color": "#eee"},
+            "nav-link-selected": {"background-color": "#06c1a4"},
+        },
+    )
+
+    hist = get_historical_data(ticker, period)
+    fig = px.line(hist, x=hist.index, y='Close', title=f"{
+                  ticker} Historical Prices ({period})")
+    st.plotly_chart(fig)
 
 
 def display_financial_ratios(ticker):
@@ -91,7 +107,6 @@ def main():
         selected = option_menu(
             menu_title=None,
             options=["Stock Info", "Historical Graph", "Financial Ratios"],
-            icons=["info-circle", "graph-up", "calculator"],
             menu_icon="cast",
             default_index=0,
             orientation="horizontal"
