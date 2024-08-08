@@ -90,7 +90,7 @@ def display_financial_ratios(ticker):
             st.write(f"**P/S Ratio:** {stock.info.get('priceToSales', 'N/A')}")
             st.write(f"**P/E Ratio:** {stock.info.get('trailingPE', 'N/A')}")
             st.write(f"**P/B Ratio:** {stock.info.get('priceToBook', 'N/A')}")
-            st.write(f"**PEG Ratio:** {stock.info.get('pegRatio', 'N/A')}")
+            st.write(f"**PEG Ratio:** {stock.info.get('trailingPegRatio', 'N/A')}")
 
     except KeyError as e:
         st.write(f"Could not fetch some of the financial ratios: {e}")
